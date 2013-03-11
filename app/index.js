@@ -126,7 +126,7 @@ Generator.prototype.bootstrapFiles = function bootstrapFiles() {
   if (this.compassBootstrap) {
     var cb = this.async();
 
-    this.write(path.join(appPath, 'styles/main.scss'), '@import "compass_twitter_bootstrap";');
+    this.write(path.join(appPath, 'styles/main.sass'), '$fontAwesomePath: "../../../styles/fonts/fontawesome-webfont"\n@import "compass_twitter_bootstrap_awesome"\n@import "compass_twitter_bootstrap_responsive"');
     this.remote('vwall', 'compass-twitter-bootstrap', 'v2.2.2.2', function (err, remote) {
       if (err) {
         return cb(err);
