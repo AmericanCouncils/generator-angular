@@ -1,0 +1,7 @@
+- When watching, safely rerun jshint on change
+- Haml support?
+- Default templated code includes references to angular-bootstrap, angular-ui
+- Proper paths to FontAwesome fonts
+- Keep app/components somewhere else, it is a vendor directory
+- Do not copy app/components into dist on build
+- Auto-run bower and npm, or put it in README of generated projects
