@@ -5,3 +5,4 @@
 - Keep app/components somewhere else, it is a vendor directory
 - Do not copy app/components into dist on build
 - Auto-run bower and npm, or put it in README of generated projects
+- Grunt build task that can run on a server (e.g. no testacular)
