@@ -20,6 +20,7 @@
   "trailing": true,
   "smarttabs": true,
   "white": false,
+  "sub": true,
   "globals": {
     "angular": false
   }
