@@ -6,31 +6,31 @@ var mountFolder = function (connect, dir) {
 
 module.exports = function (grunt) {
   // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').concat(['gruntacular']).forEach(grunt.loadNpmTasks);
-
-  // configurable paths
-  var yeomanConfig = {
-    app: 'app',
-    dist: 'dist'
-  };
-
-  try {
-    yeomanConfig.app = require('./component.json').appPath || yeomanConfig.app;
-  } catch (e) {}
+  require('matchdep').
+    filterDev('grunt-*').
+    concat(['gruntacular']).
+    forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
-    yeoman: yeomanConfig,
+    yeoman: {
+      app: 'app',
+      dist: 'dist'
+    },
     watch: {
       compass: {
-        files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        files: ['app/styles/**/*.{scss,sass}'],
         tasks: ['compass']
+      },
+      haml: {
+        files: ['app{/,/views/}*.haml'],
+        tasks: ['haml:server']
       },
       livereload: {
         files: [
-          '<%%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '{.tmp,<%%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}'
+          '{.tmp,app}{/,/views/}*.html',
+          '{.tmp,app}/styles/**/*.css',
+          'app/scripts/**/*.js',
+          'app/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         tasks: ['livereload']
       }
@@ -45,14 +45,14 @@ module.exports = function (grunt) {
             return [
               lrSnippet,
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.app)
+              mountFolder(connect, 'app')
             ];
           }
         }
       },
       test: {
         options: {
-          port: 9000,
+          port: 9005,
           middleware: function (connect) {
             return [
               mountFolder(connect, '.tmp'),
@@ -68,7 +68,7 @@ module.exports = function (grunt) {
       }
     },
     clean: {
-      dist: ['.tmp', '<%%= yeoman.dist %>/*'],
+      dist: ['.tmp', 'dist/*'],
       server: '.tmp'
     },
     jshint: {
@@ -77,7 +77,7 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%%= yeoman.app %>/scripts/{,*/}*.js'
+        'app/scripts/**/*.js'
       ]
     },
     testacular: {
@@ -88,50 +88,62 @@ module.exports = function (grunt) {
     },
     compass: {
       options: {
-        sassDir: '<%%= yeoman.app %>/styles',
+        sassDir: 'app/styles',
         cssDir: '.tmp/styles',
-        imagesDir: '<%%= yeoman.app %>/images',
-        javascriptsDir: '<%%= yeoman.app %>/scripts',
-        fontsDir: '<%%= yeoman.app %>/styles/fonts',
-        importPath: '<%%= yeoman.app %>/components',
+        imagesDir: 'app/images',
+        javascriptsDir: 'app/scripts',
+        fontsDir: 'app/styles/fonts',
+        importPath: 'app/components',
         relativeAssets: true
       },
-      dist: {},
+      dist: {
+      },
       server: {
         options: {
           debugInfo: true
         }
       }
     },
+    ngtemplates: {
+      // FIXME This target name must be the name of the angular module
+      // What a terrible way to configure this :-\
+      <%= _.camelize(appname) %>App: {
+        options: {
+          base: '.tmp/app'
+        },
+        src: [ '.tmp/app/views/*.html' ],
+        dest: '.tmp/app/templates.js'
+      }
+    },
     useminPrepare: {
-      html: '<%%= yeoman.app %>/index.html',
+      html: '.tmp/app/index.html',
       options: {
-        dest: '<%%= yeoman.dist %>'
+        dest: 'dist'
       }
     },
     usemin: {
-      html: ['<%%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%%= yeoman.dist %>/styles/{,*/}*.css'],
+      html: ['.tmp/app/index.html'],
+      css: ['dist/styles/{,*/}*.css'],
       options: {
-        dirs: ['<%%= yeoman.dist %>']
+        dirs: ['dist']
       }
     },
     imagemin: {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%%= yeoman.app %>/images',
+          cwd: 'app/images',
           src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%%= yeoman.dist %>/images'
+          dest: 'dist/images'
         }]
       }
     },
     cssmin: {
       dist: {
         files: {
-          '<%%= yeoman.dist %>/styles/main.css': [
+          'dist/styles/main.css': [
             '.tmp/styles/{,*/}*.css',
-            '<%%= yeoman.app %>/styles/{,*/}*.css'
+            'app/styles/{,*/}*.css'
           ]
         }
       }
@@ -139,21 +151,43 @@ module.exports = function (grunt) {
     htmlmin: {
       dist: {
         options: {
-          /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
+          removeCommentsFromCDATA: true,
           collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
+          removeAttributeQuotes: false,
           removeRedundantAttributes: true,
           useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
+          removeOptionalTags: true
         },
         files: [{
           expand: true,
-          cwd: '<%%= yeoman.app %>',
-          src: ['*.html', 'views/*.html'],
-          dest: '<%%= yeoman.dist %>'
+          cwd: '.tmp/haml',
+          src: ['app/{,views/}*.html'],
+          dest: '.tmp'
+        }]
+      }
+    },
+    haml: {
+      dist : {
+        options: {
+          language: 'ruby'
+        },
+        files: [{
+          expand: true,
+          src: ['app/**/*.haml'],
+          dest: '.tmp/haml/',
+          ext: '.html'
+        }]
+      },
+      server : {
+        options: {
+          language: 'ruby'
+        },
+        files: [{
+          cwd: 'app',
+          expand: true,
+          src: ['**/*.haml'],
+          dest: '.tmp',
+          ext: '.html'
         }]
       }
     },
@@ -161,17 +195,17 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%%= yeoman.dist %>/scripts',
+          cwd: 'dist/scripts',
           src: '*.js',
-          dest: '<%%= yeoman.dist %>/scripts'
+          dest: 'dist/scripts'
         }]
       }
     },
     uglify: {
       dist: {
         files: {
-          '<%%= yeoman.dist %>/scripts/scripts.js': [
-            '<%%= yeoman.dist %>/scripts/scripts.js'
+          'dist/scripts/scripts.js': [
+            'dist/scripts/scripts.js'
           ],
         }
       }
@@ -181,14 +215,32 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%%= yeoman.app %>',
-          dest: '<%%= yeoman.dist %>',
+          cwd: 'app',
+          dest: 'dist',
           src: [
             '*.{ico,txt}',
             '.htaccess',
-            'components/**/*',
-            'images/{,*/}*.{gif,webp}'
+            'font/*'
           ]
+        }]
+      }, tmp: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: 'app',
+          dest: '.tmp/app',
+          src: [
+            'scripts/**/*',
+            'components/**/*'
+          ]
+        }]
+      }, postUsemin: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '.tmp/app',
+          dest: 'dist',
+          src: [ 'index.html' ]
         }]
       }
     }
@@ -198,9 +250,16 @@ module.exports = function (grunt) {
   // remove when mincss task is renamed
   grunt.renameTask('mincss', 'cssmin');
 
+  grunt.registerTask('ngtemplatesDummy', function() {
+    var fs = require('fs');
+    fs.writeFileSync('.tmp/templates.js', '/* No templates in dev version */');
+  });
+
   grunt.registerTask('server', [
     'clean:server',
+    'haml:server', // Weirdly, this crashes if it's right before livereload...
     'compass:server',
+    'ngtemplatesDummy',
     'livereload-start',
     'connect:livereload',
     'open',
@@ -209,6 +268,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'jshint',
     'compass',
     'connect:test',
     'testacular'
@@ -216,18 +276,21 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'jshint',
+    'copy:tmp',
     'test',
-    'compass:dist',
+    'haml:dist',
+    'htmlmin',
+    'ngtemplates',
     'useminPrepare',
+    'compass:dist',
+    'copy:dist',
     'imagemin',
     'cssmin',
-    'htmlmin',
     'concat',
-    'copy',
     'usemin',
+    'copy:postUsemin',
     'ngmin',
-    'uglify'
+    'uglify:dist'
   ]);
 
   grunt.registerTask('default', ['build']);

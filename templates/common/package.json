@@ -19,12 +19,14 @@
     "grunt-bower-hooks": "0.2.0",
     "grunt-usemin": "0.1.7",
     "grunt-regarde": "0.1.1",
+    "grunt-haml": "git://github.com/concordusapps/grunt-haml.git",
+    "grunt-angular-templates": "~0.3.0",
     "gruntacular": "0.1.1",
     "grunt-open": "0.1.0",
     "matchdep": "0.1.1",
     "grunt-ngmin": "0.0.1"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">=0.10.0"
   }
 }

@@ -8,7 +8,7 @@ Example:
         Gruntfile.js
         component.json
 
-        app/index.html
+        app/index.haml
         app/scripts/your-app-name-here.js
         app/scripts/controllers/main.js
         app/components/angular/angular.js

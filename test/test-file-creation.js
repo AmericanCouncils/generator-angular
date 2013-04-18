@@ -51,7 +51,7 @@ describe('Angular generator', function () {
                     'package.json',
                     ['component.json', /"name":\s+"temp"/],
                     'app/scripts/app.js',
-                    'app/index.html',
+                    'app/index.haml',
                     'app/scripts/controllers/main.js',
                     'test/spec/controllers/main.js',
                     // 'testacular.conf.js'
@@ -76,7 +76,7 @@ describe('Angular generator', function () {
                     'package.json',
                     ['component.json', /"name":\s+"temp"/],
                     'app/scripts/app.coffee',
-                    'app/index.html',
+                    'app/index.haml',
                     'app/scripts/controllers/main.coffee',
                     'test/spec/controllers/main.coffee',
                     // 'testacular.conf.js'

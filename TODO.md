@@ -1,8 +1,11 @@
 - When watching, safely rerun jshint on change
-- Haml support?
 - Default templated code includes references to angular-bootstrap, angular-ui
 - Proper paths to FontAwesome fonts
 - Keep app/components somewhere else, it is a vendor directory
-- Do not copy app/components into dist on build
-- Auto-run bower and npm, or put it in README of generated projects
+    - Also app/styles/*bootstrap*
+- Auto-run bower and npm, or have grunt complain on all tasks if not installed
 - Grunt build task that can run on a server (e.g. no testacular)
+- Underscore.string
+- Generate README.md
+- Only allow minify-safe code, get rid of non-min templates
+- Close browser window on clean exit of grunt server

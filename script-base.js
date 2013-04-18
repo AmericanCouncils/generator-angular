@@ -14,6 +14,7 @@ function Generator() {
   } catch (e) {
     this.appname = path.basename(process.cwd());
   }
+  this.angularAppname = this._.camelize(this.appname) + "App"
 
   if (typeof this.env.options.appPath === 'undefined') {
     try {
@@ -88,12 +89,12 @@ Generator.prototype.htmlTemplate = function (src, dest) {
 Generator.prototype.addScriptToIndex = function (script) {
   try {
     var appPath = this.env.options.appPath;
-    var fullPath = path.join(appPath, 'index.html');
+    var fullPath = path.join(appPath, 'index.haml');
     angularUtils.rewriteFile({
       file: fullPath,
-      needle: '<!-- endbuild -->',
+      needle: '/endbuild',
       splicable: [
-        '<script src="scripts/' + script + '.js"></script>'
+        '%script(src="scripts/' + script + '.js")'
       ]
     });
   } catch (e) {

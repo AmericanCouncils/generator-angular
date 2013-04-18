@@ -8,6 +8,7 @@ var Generator = module.exports = function Generator() {
   yeoman.generators.Base.apply(this, arguments);
   this.argument('appname', { type: String, required: false });
   this.appname = this.appname || path.basename(process.cwd());
+  this.angularAppname = this._.camelize(this.appname) + "App"
 
   var args = ['main'];
 
@@ -144,8 +145,8 @@ Generator.prototype.bootstrapFiles = function bootstrapFiles() {
   }
 };
 
-Generator.prototype.createIndexHtml = function createIndexHtml() {
-  this.template('../../templates/common/index.html', path.join(this.appPath, 'index.html') );
+Generator.prototype.createIndexHaml = function createIndexHaml() {
+  this.template('../../templates/common/index.haml', path.join(this.appPath, 'index.haml') );
 };
 
 Generator.prototype.packageFiles = function () {
