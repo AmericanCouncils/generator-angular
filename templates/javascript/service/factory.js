@@ -1,16 +1,16 @@
 'use strict';
 
-angular.module('<%= _.camelize(appname) %>App')
-  .factory('<%= _.camelize(name) %>', function () {
-    // Service logic
-    // ...
+angular.module('<%= angularAppname %>')
+.factory('<%= _.camelize(name) %>', <%= minsafeFuncOpen() %>
+  // Service logic
+  // ...
 
-    var meaningOfLife = 42;
+  var meaningOfLife = 42;
 
-    // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
-    };
-  });
+  // Public API here
+  return {
+    someMethod: function () {
+      return meaningOfLife;
+    }
+  };
+<%= minsafeFuncClose() %>);

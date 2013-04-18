@@ -56,10 +56,6 @@ function Generator() {
     this.scriptSuffix = '.coffee';
   }
 
-  if (this.env.options.minsafe) {
-    sourceRoot += '-min';
-  }
-
   this.sourceRoot(path.join(__dirname, sourceRoot));
 }
 
@@ -99,5 +95,28 @@ Generator.prototype.addScriptToIndex = function (script) {
     });
   } catch (e) {
     console.log('\nUnable to find '.yellow + fullPath + '. Reference to '.yellow + script + '.js ' + 'not added.\n'.yellow);
+  }
+};
+
+Generator.prototype.minsafeFuncOpen = function () {
+  var args = Array.prototype.slice.call(arguments);
+  var r = "";
+  if (this.options.minsafe) {
+    r += "\n[";
+    if (args.length > 0) {
+      r += "'" + args.join("', '") + "',";
+    }
+    r += "\n";
+  }
+  r = r + "function(" + args.join(', ') + ") {";
+
+  return r;
+};
+
+Generator.prototype.minsafeFuncClose = function () {
+  if (this.options.minsafe) {
+    return "}]";
+  } else {
+    return "}";
   }
 };

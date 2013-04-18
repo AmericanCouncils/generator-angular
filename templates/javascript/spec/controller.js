@@ -1,9 +1,7 @@
 'use strict';
 
 describe('Controller: <%= _.classify(name) %>Ctrl', function () {
-
-  // load the controller's module
-  beforeEach(module('<%= _.camelize(appname) %>App'));
+  beforeEach(module('<%= angularAppname %>'));
 
   var <%= _.classify(name) %>Ctrl,
     scope;

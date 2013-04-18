@@ -3,7 +3,6 @@ var path = require('path');
 var util = require('util');
 var yeoman = require('yeoman-generator');
 
-
 var Generator = module.exports = function Generator() {
   yeoman.generators.Base.apply(this, arguments);
   this.argument('appname', { type: String, required: false });

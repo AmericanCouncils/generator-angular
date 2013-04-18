@@ -4,7 +4,6 @@ var util = require('util');
 var ScriptBase = require('../script-base.js');
 var angularUtils = require('../util.js');
 
-
 module.exports = Generator;
 
 function Generator() {

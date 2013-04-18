@@ -1,9 +1,7 @@
 'use strict';
 
 describe('Service: <%= _.camelize(name) %>', function () {
-
-  // load the service's module
-  beforeEach(module('<%= _.camelize(appname) %>App'));
+  beforeEach(module('<%= angularAppname %>'));
 
   // instantiate service
   var <%= _.camelize(name) %>;

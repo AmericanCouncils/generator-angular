@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('<%= _.camelize(appname) %>App')
-  .service('<%= _.camelize(name) %>', function <%= _.camelize(name) %>() {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-  });
+angular.module('<%= angularAppname %>')
+.service('<%= _.camelize(name) %>', <%= minsafeFuncOpen() %>
+  // AngularJS will instantiate a singleton by calling "new" on this function
+<%= misafeFuncClose() %>);
