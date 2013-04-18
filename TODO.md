@@ -9,3 +9,4 @@
 - Generate README.md
 - Only allow minify-safe code, get rid of non-min templates
 - Close browser window on clean exit of grunt server
+- Include all the magical extra modules (bootstrap, etc.) we want by default
