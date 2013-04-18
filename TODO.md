@@ -7,8 +7,8 @@
 - Grunt build task that can run on a server (e.g. no testacular)
 - Underscore.string
 - Generate README.md
-- Only allow minify-safe code, get rid of non-min templates
 - Close browser window on clean exit of grunt server
 - Include all the magical extra modules (bootstrap, etc.) we want by default
+    - With command line options to set to minimal includes, or asking for each
 - Re-add coffeescript support
 - Make use of Haml optional
