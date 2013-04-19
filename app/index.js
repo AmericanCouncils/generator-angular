@@ -153,3 +153,8 @@ Generator.prototype.packageFiles = function () {
   this.template( '../../templates/common/package.json', 'package.json' );
   this.template( '../../templates/common/Gruntfile.js', 'Gruntfile.js' );
 };
+
+Generator.prototype.underscoreStringIntegrationFile = function () {
+  this.template( '../../templates/common/integrate_underscore_string.js',
+                 'app/init/integrate_underscore_string.js' );
+};

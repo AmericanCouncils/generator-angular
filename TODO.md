@@ -17,3 +17,4 @@
 - Re-add proper coffeescript support
     - Can we back-compile the Javascript? Probably not, but worth a try...
 - Make use of Haml optional
+- Maybe return to MainCtrl pattern?
