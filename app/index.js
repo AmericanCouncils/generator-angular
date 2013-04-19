@@ -126,7 +126,6 @@ Generator.prototype.bootstrapFiles = function bootstrapFiles() {
   if (this.compassBootstrap) {
     var cb = this.async();
 
-    this.write(path.join(appPath, 'styles/main.sass'), '$fontAwesomePath: "../../../styles/fonts/fontawesome-webfont"\n@import "compass_twitter_bootstrap_awesome"\n@import "compass_twitter_bootstrap_responsive"');
     this.remote('vwall', 'compass-twitter-bootstrap', 'v2.2.2.2', function (err, remote) {
       if (err) {
         return cb(err);
@@ -157,4 +156,8 @@ Generator.prototype.packageFiles = function () {
 Generator.prototype.underscoreStringIntegrationFile = function () {
   this.template( '../../templates/common/integrate_underscore_string.js',
                  'app/init/integrate_underscore_string.js' );
+};
+
+Generator.prototype.sassCompassFontawesomeFile = function () {
+  this.template( '../../templates/common/main.sass', 'app/styles/main.sass' );
 };
