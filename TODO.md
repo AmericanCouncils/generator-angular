@@ -10,5 +10,10 @@
 - Close browser window on clean exit of grunt server
 - Include all the magical extra modules (bootstrap, etc.) we want by default
     - With command line options to set to minimal includes, or asking for each
-- Re-add coffeescript support
+    - Best way to handle all this is to have a list of libraries referenced by
+      the composer.json and index.haml templates, rather than the ugly series
+      of if statements used now.
+    - FontAwesome should also be optional
+- Re-add proper coffeescript support
+    - Can we back-compile the Javascript? Probably not, but worth a try...
 - Make use of Haml optional
