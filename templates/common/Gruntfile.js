@@ -230,7 +230,8 @@ module.exports = function (grunt) {
           dest: '.tmp/app',
           src: [
             'scripts/**/*',
-            'components/**/*'
+            'components/**/*',
+            'init/**/*'
           ]
         }]
       }, postUsemin: {
