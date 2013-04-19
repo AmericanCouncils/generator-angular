@@ -102,7 +102,7 @@ Generator.prototype.minsafeFuncOpen = function () {
   var args = Array.prototype.slice.call(arguments);
   var r = "";
   if (this.options.minsafe) {
-    r += "\n[";
+    r += "[\n";
     if (args.length > 0) {
       r += "'" + args.join("', '") + "',";
     }
