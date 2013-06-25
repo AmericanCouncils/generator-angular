@@ -16,7 +16,6 @@
 - Make use of Haml optional
 - Maybe return to MainCtrl pattern?
 - Add built-in support for component-shrinkwrap and npm shrinkwrap
-- Need only 4 lines of IE comments in index.html
 - HTML 5 doctype
 - Fix the default test
 - Add "loading" text on the index

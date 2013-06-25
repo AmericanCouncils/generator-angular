@@ -4,8 +4,7 @@
 /[if lt IE 7] <html class="no-js lt-ie9 lt-ie8 lt-ie7" ng-app="<%= angularAppname %>">
 /[if IE 7] <html class="no-js lt-ie9 lt-ie8" ng-app="<%= angularAppname %>">
 /[if IE 8] <html class="no-js lt-ie9" ng-app="<%= angularAppname %>">
-/[if gt IE 8] <html class="no-js" ng-app="<%= angularAppname %>">
-<!-- [if !IE]> --> <html class="no-js" ng-app="<%= angularAppname %>"> <!-- <![endif] -->
+<!-- [if gt IE 8]> --> <html class="no-js" ng-app="<%= angularAppname %>"> <!-- <![endif] -->
 -tab_up
 
 %head
@@ -30,6 +29,7 @@
   .container(ng-view)
 
   /build:js scripts/scripts.js
+
   -# Library scripts
   %script(src="components/lodash/lodash.js")
   %script(src="components/underscore.string/lib/underscore.string.js")
@@ -47,6 +47,7 @@
   %script(src="templates.js")
 
   -# User module scripts
+
   /endbuild
 
 -# End of IE trickery
