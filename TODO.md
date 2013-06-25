@@ -20,4 +20,3 @@
 - Fix the default test
 - Add "loading" text on the index
 - Parameters.js
-- Use my livereload fork that allows proxies
