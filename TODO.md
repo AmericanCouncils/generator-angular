@@ -20,3 +20,4 @@
 - Fix the default test
 - Add "loading" text on the index
 - Parameters.js
+- Use zepto instead of jquery when not on IE
